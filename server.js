@@ -18,8 +18,8 @@ function renderForm(posts, res) {
 server.on('request', function(req, res) {
     if (req.method === "POST") {
         req.data = "";
-        req.on("readable", function(){
-            req.data += req.read();
+        req.on("data", function(chunk) {
+            req.data += chunk;
         });
         req.on("end", function(){
             var query = qs.parse(req.data);
